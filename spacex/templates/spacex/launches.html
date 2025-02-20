@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpaceX Launches</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .launch-card { margin: 20px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        .launch-img { width: 100%; max-width: 600px; }
+        .pagination { display: flex; justify-content: center; margin: 20px 0; }
+        .pagination a, .pagination span { margin: 0 5px; padding: 8px 16px; border: 1px solid #ccc; border-radius: 5px; text-decoration: none; }
+        .pagination .current { background-color: #007bff; color: white; }
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'spacex/styles.css' %}" />
+</head>
+<body>
+    <h1 class="text-center">SpaceX Launches</h1>
+
+    {% if page_obj %}
+        {% for launch in page_obj %}
+            <div class="launch-card">
+                <h2>{{ launch.name }}</h2>
+                <p><strong>Date:</strong> {{ launch.date_utc|date:"Y-m-d H:i:s" }}</p>
+                <p><strong>Details:</strong> {{ launch.details }}</p>
+                {% if launch.links.flickr.original %}
+                    <img class="launch-img" src="{{ launch.links.flickr.original.0 }}" alt="Launch Image">
+                {% endif %}
+             </div>
+        {% endfor %}
+
+        <div class="pagination">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">{{ page_obj.number }}</span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </div>
+    {% else %}
+        <p>No launch data found.</p>
+    {% endif %}
+</body>
+</html>
