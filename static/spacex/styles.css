@@ -1,0 +1,17 @@
+body {
+    background-color: lightgray;
+}
+
+h1 {
+    color: purple;
+}
+
+.launch-card {
+    border: 2px solid purple;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    transition: transform 0.3s;
+}
+
+.launch-card:hover {
+    transform: scale(1.02);
+}
