@@ -117,7 +117,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 # Add your PythonAnywhere domain to ALLOWED_HOSTS
-ALLOWED_HOSTS = ["Menace007.pythonanywhere.com"]
+ALLOWED_HOSTS = []
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [
